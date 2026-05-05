@@ -1,0 +1,73 @@
+input_dir: input
+output_dir: output
+prompts_dir: prompts
+secrets_file: secrets.yaml
+question_count_per_document: 10
+max_chars_per_llm_call: 6000
+max_questions_per_llm_call: 6
+timeout_sec: 180
+temperature: 0.2
+max_tokens: 8000
+use_json_mode: true
+llm_roles:
+  generator: chatgpt
+  reviewer: deepseek
+providers:
+  chatgpt:
+    enabled: true
+    prefix: chatgpt
+    base_url: https://api.openai.com/v1
+    endpoint: /chat/completions
+    model: gpt-5.5
+    reasoning_effort: minimal
+    max_tokens: 16000
+  deepseek:
+    enabled: true
+    prefix: deepseek
+    base_url: https://api.deepseek.com
+    endpoint: /chat/completions
+    model: deepseek-v4-flash
+    max_tokens: 8000
+review:
+  enabled: true
+  max_rewrite_attempts: 1
+  save_review_files: true
+excel_columns:
+- Вопрос
+- Правильный ответ
+- Неправильный ответ 1
+- Неправильный ответ 2
+- Раздел
+- Пункт
+- Пояснение правильного ответа
+- Тема
+ui:
+  theme: kuzbasscot
+  preview_max_chars: 12000
+  auto_open_browser: true
+model_catalog:
+  chatgpt:
+  - id: gpt-5.5
+    description: макс. качество
+  - id: gpt-5.4
+    description: сильный баланс
+  - id: gpt-5.4-mini
+    description: быстрее дешевле
+  - id: gpt-5.4-nano
+    description: минимальная цена
+  - id: gpt-4.1
+    description: стабильный текст
+  - id: gpt-4.1-mini
+    description: быстрый текст
+  deepseek:
+  - id: deepseek-v4-pro
+    description: лучшее качество
+  - id: deepseek-v4-flash
+    description: быстро дёшево
+  - id: deepseek-chat
+    description: старое имя
+  - id: deepseek-reasoner
+    description: старое reasoning
+review_test:
+  enabled: false
+  forced_bad_questions_count: 0

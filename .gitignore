@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+*.pyc
+secrets.yaml
+input/uploaded/
+output/*
+!output/.gitkeep
