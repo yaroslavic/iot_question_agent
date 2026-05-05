@@ -156,3 +156,32 @@ review_test:
   enabled: false
   forced_bad_questions_count: 0
 ```
+
+
+## fix9: пустой ответ LLM из-за thinking/reasoning
+
+Если в ошибке видно `Raw assistant content is empty`, а в usage все выходные токены ушли в `reasoning_tokens`, это означает, что модель сгенерировала скрытое рассуждение, но не выдала финальный JSON.
+
+В fix9 сделаны две защиты:
+
+1. Для ChatGPT/OpenAI по умолчанию используется `endpoint: /responses`, потому что для GPT-5.x OpenAI рекомендует Responses API. Клиент извлекает `output_text`/`output[].content[].text` и использует `max_output_tokens`.
+2. Для DeepSeek V4 по умолчанию добавлен параметр `thinking: disabled`. Это отключает thinking mode, чтобы DeepSeek возвращал обычный `content` с JSON, а не только `reasoning_content`.
+
+Ключевой фрагмент `config.yaml`:
+
+```yaml
+providers:
+  chatgpt:
+    base_url: https://api.openai.com/v1
+    endpoint: /responses
+    model: gpt-5.5
+    reasoning_effort: minimal
+    max_tokens: 16000
+
+  deepseek:
+    base_url: https://api.deepseek.com
+    endpoint: /chat/completions
+    model: deepseek-v4-flash
+    thinking: disabled
+    max_tokens: 8000
+```

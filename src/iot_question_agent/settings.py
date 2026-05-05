@@ -17,6 +17,7 @@ class ProviderConfig:
     model: str
     max_tokens: int | None = None
     reasoning_effort: str | None = None
+    thinking: str | None = None
 
     @property
     def url(self) -> str:
@@ -96,6 +97,7 @@ def load_config(config_path: str | Path) -> AppConfig:
                 model=str(item.get("model", "")).strip(),
                 max_tokens=int(item["max_tokens"]) if item.get("max_tokens") is not None else None,
                 reasoning_effort=str(item.get("reasoning_effort", "")).strip() or None,
+                thinking=str(item.get("thinking", "")).strip() or None,
             )
         )
 

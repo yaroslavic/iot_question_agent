@@ -263,12 +263,13 @@ def _update_config_from_ui(payload: dict[str, Any]) -> dict[str, Any]:
                 provider_item.setdefault("prefix", provider_key)
                 if provider_key == "chatgpt":
                     provider_item.setdefault("base_url", "https://api.openai.com/v1")
-                    provider_item.setdefault("endpoint", "/chat/completions")
+                    provider_item.setdefault("endpoint", "/responses")
                     provider_item.setdefault("reasoning_effort", "minimal")
                     provider_item.setdefault("max_tokens", 16000)
                 elif provider_key == "deepseek":
                     provider_item.setdefault("base_url", "https://api.deepseek.com")
                     provider_item.setdefault("endpoint", "/chat/completions")
+                    provider_item.setdefault("thinking", "disabled")
                     provider_item.setdefault("max_tokens", 8000)
             _ensure_model_in_catalog(raw, provider_key, model)
 

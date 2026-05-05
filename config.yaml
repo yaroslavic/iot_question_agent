@@ -17,7 +17,7 @@ providers:
     enabled: true
     prefix: chatgpt
     base_url: https://api.openai.com/v1
-    endpoint: /chat/completions
+    endpoint: /responses
     model: gpt-5.5
     reasoning_effort: minimal
     max_tokens: 16000
@@ -27,6 +27,7 @@ providers:
     base_url: https://api.deepseek.com
     endpoint: /chat/completions
     model: deepseek-v4-flash
+    thinking: disabled
     max_tokens: 8000
 review:
   enabled: true
